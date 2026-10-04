@@ -90,6 +90,20 @@ android {
             ?: ""
         buildConfigField("String", "TMDB_EDGE_KEY", "\"${edgeKey.replace("\\", "\\\\").replace("\"", "\\\"")}\"")
 
+        // K PARK BAR: optional pre-configured Xtream account, added on first launch (see KparkbarAutoLogin).
+        // NEVER in the tracked repo: env var (CI secret) > Gradle property > kparkbar.credentials.properties
+        // at the repo root (git-ignored). Blank values leave the stock first-run setup untouched.
+        val kpbProps = Properties().apply {
+            val f = rootProject.file("kparkbar.credentials.properties")
+            if (f.isFile) f.inputStream().use { load(it) }
+        }
+        fun kpb(key: String, env: String): String =
+            System.getenv(env) ?: providers.gradleProperty(key).orNull ?: kpbProps.getProperty(key) ?: ""
+        fun q(v: String) = "\"" + v.replace("\\", "\\\\").replace("\"", "\\\"") + "\""
+        buildConfigField("String", "KPB_XTREAM_SERVER", q(kpb("kpb.server", "KPB_XTREAM_SERVER")))
+        buildConfigField("String", "KPB_XTREAM_USER", q(kpb("kpb.user", "KPB_XTREAM_USER")))
+        buildConfigField("String", "KPB_XTREAM_PASS", q(kpb("kpb.pass", "KPB_XTREAM_PASS")))
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
