@@ -43,15 +43,18 @@ jobs:
       - name: Build debug APK
         run: ./gradlew :app:assembleDebug --no-daemon --stacktrace
 
-      - name: Name the APK
+      - name: Collect APKs
         run: |
           mkdir -p out
-          cp app/build/outputs/apk/debug/*.apk out/KParkBarTV-debug.apk
+          find app/build/outputs/apk -name '*.apk' -print
+          find app/build/outputs/apk -name '*.apk' | while read -r f; do
+            cp "$f" "out/KParkBarTV-$(basename "$(dirname "$(dirname "$f")")")-$(basename "$f")"
+          done
           ls -la out
 
-      - name: Upload APK
+      - name: Upload APKs
         uses: actions/upload-artifact@v4
         with:
           name: KParkBarTV-debug-apk
-          path: out/KParkBarTV-debug.apk
+          path: out/*.apk
           if-no-files-found: error
