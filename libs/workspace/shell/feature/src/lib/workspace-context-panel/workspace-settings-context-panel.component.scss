@@ -1,0 +1,65 @@
+@use '../../nav-list.scss';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+// Quiet sentence-case rail header — matches the typography of the
+// section nav items below ("Dashboard", "Sources", etc., all sentence
+// case) instead of standing out as an uppercase eyebrow that didn't
+// appear anywhere else in the workspace rail. The muted colour and
+// small size still distinguish it from the clickable items so it reads
+// as a section caption rather than competing for focus.
+.panel-title {
+    margin: 0;
+    padding: 20px 18px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.005em;
+    color: var(--mat-sys-on-surface-variant);
+}
+
+.settings-panel-body {
+    flex: 1;
+    min-height: 0;
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+// `height: 100%` here does not resolve against a stretched flex item, so the
+// list kept its full content height and overflowed the panel whenever the
+// panel was shorter than its sections (a phone, or a short desktop window).
+.settings-sections-list {
+    flex: 1;
+    min-height: 0;
+    // The list now reaches the panel's bottom edge (Back moved to the
+    // header), so it clears the home indicator itself.
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+}
+
+// Sections without settings-search matches stay reachable but recede.
+.settings-section-item.has-no-matches:not(.active) {
+    opacity: 0.55;
+}
+
+.settings-section-item:hover:not(.active):not(.selected) {
+    background: var(--app-selection-surface);
+}
+
+// On a landscape phone the panel is only ~108-148px tall, and its caption
+// would take a third of that from the section list. The rail already labels
+// the page, so the caption is what gives way.
+@media (max-width: 640px) and (max-height: 599px) {
+    .panel-title {
+        display: none;
+    }
+
+    .settings-panel-body {
+        padding-top: 8px;
+    }
+}
