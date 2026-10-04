@@ -19,6 +19,10 @@
 # category protocol: Stable protocol or comparison identifier.
 # category technical: Reviewed non-user-facing technical literal.
 
+3	empty	app/src/main/java/tv/own/owntv/KparkbarAutoLogin.kt	\0
+1	technical	app/src/main/java/tv/own/owntv/KparkbarAutoLogin.kt	K PARK BAR
+1	log	app/src/main/java/tv/own/owntv/KparkbarAutoLogin.kt	KparkbarAutoLogin
+1	log	app/src/main/java/tv/own/owntv/KparkbarAutoLogin.kt	seeded Xtream source for profile=$pid
 1	log	app/src/main/java/tv/own/owntv/MainActivity.kt	BgImage
 1	log	app/src/main/java/tv/own/owntv/MainActivity.kt	OwnTVHome
 1	compiler	app/src/main/java/tv/own/owntv/MainActivity.kt	RememberReturnType
@@ -36,7 +40,7 @@
 1	performance	app/src/main/java/tv/own/owntv/MainActivity.kt	profile-id-loaded
 1	performance	app/src/main/java/tv/own/owntv/MainActivity.kt	profiles-loaded
 1	compiler	app/src/main/java/tv/own/owntv/OwnTVApp.kt	DEPRECATION
-1	technical	app/src/main/java/tv/own/owntv/OwnTVApp.kt	ahXN00/OwnTV
+1	technical	app/src/main/java/tv/own/owntv/OwnTVApp.kt	aigbebshady/FFWS
 1	file-path	app/src/main/java/tv/own/owntv/OwnTVApp.kt	image_cache
 1	performance	app/src/main/java/tv/own/owntv/OwnTVApp.kt	koin-started
 3	empty	app/src/main/java/tv/own/owntv/core/i18n/LocalizedContent.kt	\0
@@ -725,7 +729,8 @@
 1	protocol	app/src/main/java/tv/own/owntv/features/shell/components/SettingsScreen.kt	exoplayer
 2	technical	app/src/main/java/tv/own/owntv/features/shell/components/SettingsScreen.kt	focus_highlight
 2	technical	app/src/main/java/tv/own/owntv/features/shell/components/SettingsScreen.kt	fonts
-1	technical	app/src/main/java/tv/own/owntv/features/shell/components/SettingsScreen.kt	github.com/ahXN00/OwnTV
+1	url	app/src/main/java/tv/own/owntv/features/shell/components/SettingsScreen.kt	github.com/aigbebshady/FFWS
+1	url	app/src/main/java/tv/own/owntv/features/shell/components/SettingsScreen.kt	github.com/aigbebshady/FFWS/issues
 1	technical	app/src/main/java/tv/own/owntv/features/shell/components/SettingsScreen.kt	group_app
 1	technical	app/src/main/java/tv/own/owntv/features/shell/components/SettingsScreen.kt	group_appearance
 1	technical	app/src/main/java/tv/own/owntv/features/shell/components/SettingsScreen.kt	group_content_metadata
@@ -756,7 +761,6 @@
 1	technical	app/src/main/java/tv/own/owntv/features/shell/components/SettingsScreen.kt	quick_preview_sound
 1	technical	app/src/main/java/tv/own/owntv/features/shell/components/SettingsScreen.kt	reminder_lead
 1	technical	app/src/main/java/tv/own/owntv/features/shell/components/SettingsScreen.kt	reminders
-1	technical	app/src/main/java/tv/own/owntv/features/shell/components/SettingsScreen.kt	t.me/owntvplayer
 1	technical	app/src/main/java/tv/own/owntv/features/shell/components/SettingsScreen.kt	tab_
 1	technical	app/src/main/java/tv/own/owntv/features/shell/components/SettingsScreen.kt	tab_${tab.name}
 1	technical	app/src/main/java/tv/own/owntv/features/shell/components/SettingsScreen.kt	tab_DNS
