@@ -91,10 +91,7 @@ enum class RailState {
 data class NowPlayingRail(val logoUrl: String?, val audioMode: Boolean, val playing: Boolean)
 
 /** The mockup's rail order (`screens.js` `cRail`): Search first, the Guide right after Live TV, More last. */
-private val StageRailOrder = listOf(
-    MainSection.SEARCH, MainSection.HOME, MainSection.LIVE_TV, MainSection.EPG,
-    MainSection.MOVIES, MainSection.SERIES, MainSection.DOWNLOADS,
-)
+private val StageRailOrder = listOf(MainSection.LIVE_TV) // K PARK BAR: Live TV only (More is appended)
 
 /** The rail's width with names (P1b): Normal 280 · Wide 340 · Extra wide 400; Compact is the 84 capsule. */
 private val NavSize.openWidth get() = when (this) {

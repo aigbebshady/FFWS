@@ -19,7 +19,13 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
+import androidx.tv.material3.Text
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -57,23 +63,13 @@ private fun accentTriangle(): Color? {
  */
 @Composable
 fun BrandMark(icon: AppIcon, size: Dp, modifier: Modifier = Modifier, followAccent: Boolean = true) {
-    val small = size <= 32.dp
-    val accent = accentTriangle().takeIf { followAccent }
-    if (icon == AppIcon.PIXEL && !small) {
-        PixelMark(modifier.size(size), triangle = accent ?: Color(icon.accent))
-        return
-    }
-    Box(modifier.size(size)) {
-        Image(painterResource(if (small) icon.markSmall else icon.mark), contentDescription = null, modifier = Modifier.fillMaxSize())
-        if (accent != null && icon.isCard(small)) {
-            Image(
-                painterResource(if (small) R.drawable.owntv_mark_play_small else R.drawable.owntv_mark_play),
-                contentDescription = null,
-                modifier = Modifier.fillMaxSize(),
-                colorFilter = ColorFilter.tint(accent),
-            )
-        }
-    }
+    // K PARK BAR: one mark for every icon colour; the OwnTV drawings are not used.
+    Image(
+        painterResource(R.drawable.kparkbar_mark),
+        contentDescription = null,
+        modifier = modifier.size(size),
+        contentScale = ContentScale.Fit,
+    )
 }
 
 /**
@@ -131,13 +127,19 @@ private fun pixelDots(): List<Triple<Float, Float, Int>> {
  * core's two vectors at [width]; its height follows the 988 × 182 drawing.
  */
 @Composable
-fun Wordmark(width: Dp, modifier: Modifier = Modifier, tv: Color = stageAccent.accent, own: Color = WordmarkCream) {
-    Box(modifier.width(width).height(width * 182f / 988f)) {
-        Image(painterResource(R.drawable.owntv_wordmark_own), null, Modifier.fillMaxSize(), colorFilter = ColorFilter.tint(own))
-        Image(painterResource(R.drawable.owntv_wordmark_tv), null, Modifier.fillMaxSize(), colorFilter = ColorFilter.tint(tv))
-    }
+fun Wordmark(width: Dp, modifier: Modifier = Modifier, tv: Color = KparkGold, own: Color = WordmarkCream) {
+    Text(
+        text = stringResource(R.string.app_name),
+        modifier = modifier.width(width),
+        color = tv,
+        fontFamily = FontFamily.Serif,
+        fontWeight = FontWeight.Bold,
+        fontSize = (width.value * 0.13f).sp,
+        maxLines = 1,
+    )
 }
 
+val KparkGold = Color(0xFFC9A66B)
 val WordmarkCream = Color(0xFFFFF6EE)
 
 /**
@@ -151,24 +153,11 @@ fun BrandLockup(
     markSize: Int = 36,
     stacked: Boolean = false,
 ) {
-    val icon = rememberAppliedIcon()
-    val colors = OwnTVTheme.colors
-    val parts = @Composable {
-        BrandMark(icon, markSize.dp)
-        // On a light theme "own" takes the text colour; the cream is for dark surfaces.
-        Wordmark((markSize * 2.75f).dp, own = if (colors.isDark) WordmarkCream else colors.textPrimary)
-    }
-    if (stacked) {
-        Column(
-            modifier = modifier,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy((markSize * 0.2f).dp),
-        ) { parts() }
-    } else {
-        Row(
-            modifier = modifier,
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy((markSize * 0.23f).dp),
-        ) { parts() }
-    }
+    // K PARK BAR: the full logo (name, K mark, Honolulu line) replaces the OwnTV mark + wordmark.
+    Image(
+        painterResource(R.drawable.kparkbar_logo),
+        contentDescription = stringResource(R.string.app_name),
+        modifier = modifier.width((markSize * 4.5f).dp).height((markSize * 4.5f * 939f / 1400f).dp),
+        contentScale = ContentScale.Fit,
+    )
 }

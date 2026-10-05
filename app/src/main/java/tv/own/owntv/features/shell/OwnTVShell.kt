@@ -489,7 +489,7 @@ fun OwnTVShell(
                     liveVm.watchFullscreen(channel, emptyList())
                     playerMode = PlayerMode.FULLSCREEN
                 } else {
-                    onSelectSection(MainSection.HOME)
+                    onSelectSection(MainSection.LIVE_TV)
                     localSubToast.show(startupChannelUnavailable)
                 }
             }
@@ -724,7 +724,7 @@ fun OwnTVShell(
     }
     val dispatchRemoteShortcut: (RemoteShortcutAction) -> Unit = { action ->
         when (action) {
-            RemoteShortcutAction.OPEN_HOME -> openShortcutSection(MainSection.HOME)
+            RemoteShortcutAction.OPEN_HOME -> openShortcutSection(MainSection.LIVE_TV)
             RemoteShortcutAction.OPEN_LIVE_TV -> openShortcutSection(MainSection.LIVE_TV)
             RemoteShortcutAction.OPEN_MOVIES -> openShortcutSection(MainSection.MOVIES)
             RemoteShortcutAction.OPEN_SERIES -> openShortcutSection(MainSection.SERIES)
@@ -1239,7 +1239,7 @@ fun OwnTVShell(
                                 trendingSearchActive = false
                                 restoreTrendingSearchFocus = true
                                 restoreFocus = false
-                                onSelectSection(MainSection.HOME)
+                                onSelectSection(MainSection.LIVE_TV)
                             },
                             modifier = Modifier.fillMaxSize(),
                         )

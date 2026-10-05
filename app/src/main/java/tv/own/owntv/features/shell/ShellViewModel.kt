@@ -334,7 +334,7 @@ class ShellViewModel(
         .map<Long, Long?> { it }
         .stateIn(viewModelScope, SharingStarted.Eagerly, null)
 
-    private val _selectedSection = MutableStateFlow(MainSection.HOME)
+    private val _selectedSection = MutableStateFlow(MainSection.LIVE_TV)
     val selectedSection: StateFlow<MainSection> = _selectedSection.asStateFlow()
 
     fun selectSection(section: MainSection) {
