@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write   # needed to publish the "latest" Release
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -51,6 +51,20 @@ jobs:
             cp "$f" "out/KParkBarTV-$(basename "$(dirname "$(dirname "$f")")")-$(basename "$f")"
           done
           ls -la out
+
+      - name: Publish Release (standard APK only)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          APK=$(find out -name '*standard*.apk' | head -1)
+          test -n "$APK"
+          cp "$APK" kparkbar.apk
+          gh release delete latest --cleanup-tag --yes || true
+          gh release create latest kparkbar.apk \
+            --target "$GITHUB_SHA" \
+            --title "K PARK BAR TV (latest build)" \
+            --notes "Debug-signed build for Fire TV / Android TV (ARM). Contains no provider login." \
+            --prerelease
 
       - name: Upload APKs
         uses: actions/upload-artifact@v4
